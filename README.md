@@ -3,67 +3,83 @@ This repo shows the python code for using Autogen AI framework.
 ---
 
 ````markdown
-Autogen
-Automated Code Generation Framework
-Autogen is a powerful and flexible framework designed to automate the generation of code, configurations, and boilerplate for various programming languages and project types. It aims to streamline development workflows, reduce manual errors, and accelerate the creation of new projects or features by providing a customizable and extensible generation engine.
+AutoGen
+Overview
+AutoGen is a framework designed to simplify the creation and management of AI agents for multi-agent workflows. It provides a modular and extensible platform for building conversational AI systems, leveraging large language models (LLMs), tools, and human-in-the-loop interactions. This project is a fork of the original Microsoft AutoGen repository, with custom enhancements and modifications tailored for specific use cases.
+Features
 
-✨ Features
-Template-Driven Generation: Utilize predefined or custom templates to generate code based on your specifications.
+Multi-Agent Workflows: Build and orchestrate complex agent interactions with support for diverse conversation patterns.
+Customizable Agents: Create agents with configurable LLMs, tools, and system messages for tailored functionality.
+Extensible Architecture: Leverage a layered design with Core and AgentChat APIs for flexibility and rapid prototyping.
+Cross-Language Support: Supports Python and .NET, with plans for additional language interoperability.
+Community Extensions: Integrate with built-in and third-party extensions for enhanced capabilities.
+AutoGen Studio: A low-code interface for prototyping multi-agent systems (not production-ready).
 
-Language Agnostic: Supports generation for multiple programming languages (e.g., Python, JavaScript, Java, Go, C#) and file formats (e.g., JSON, YAML, XML).
+Installation
+To get started with AutoGen, ensure you have Python 3.10 or later installed. Follow these steps:
 
-Configurable Inputs: Define inputs through configuration files (e.g., JSON, YAML) or command-line arguments to drive the generation process.
-
-Extensible Architecture: Easily add new templates, generators, or custom logic to suit unique project requirements.
-
-Boilerplate Reduction: Automate the creation of common project structures, API endpoints, database models, and more.
-
-CLI Interface: Simple command-line interface for quick and efficient code generation.
-
-🚀 Installation
-To get started with Autogen, follow these steps:
-
-Clone the repository:
-
+Clone the Repository:
 git clone https://github.com/shdhumale/autogen.git
 cd autogen
 
-Install dependencies (assuming Python and pip):
 
-pip install -r requirements.txt
-
-Note: If requirements.txt is not present, you might need to install specific dependencies based on the project's language and tools. Common ones might include Jinja2 for templating.
-
-Set up your environment:
-Depending on the project, you might need to set up environment variables or configuration files. Refer to the config/ directory or any .env.example files if they exist.
+Install Dependencies:
+pip install -U "autogen-agentchat" "autogen-ext[openai]"
 
 
-🤝 Contributing
-We welcome contributions to Autogen! If you'd like to contribute, please follow these guidelines:
+Optional: Install AutoGen Studio:
+pip install -U "autogenstudio"
+autogenstudio ui --port 8080 --appdir ./myapp
 
-Fork the repository.
+Open your browser and navigate to http://localhost:8080 to use the AutoGen Studio interface.
 
-Create a new branch for your feature or bug fix: git checkout -b feature/your-feature-name or bugfix/fix-something.
 
-Make your changes.
+Usage
+Below is a basic example of creating a simple information validation workflow with two agents using the AutoGen framework:
+from autogen import ConversableAgent, LLMConfig
 
-Write tests for your changes.
+# Define LLM configuration (requires OPENAI_API_KEY environment variable)
+llm_config = LLMConfig(api_type="openai", model="gpt-4o-mini")
 
-Ensure your code passes all tests and linting checks.
+# Create an assistant agent
+assistant = ConversableAgent(
+    name="assistant",
+    system_message="You are an assistant that responds concisely.",
+    llm_config=llm_config
+)
 
-Commit your changes with a clear and concise message.
+# Create a fact-checking agent
+fact_checker = ConversableAgent(
+    name="fact_checker",
+    system_message="You are a fact-checking assistant.",
+    llm_config=llm_config
+)
 
-Push your branch to your forked repository.
+# Initiate a chat between agents
+assistant.initiate_chat(
+    fact_checker,
+    message="Verify the accuracy of the statement: The moon is made of cheese."
+)
 
-Open a Pull Request to the main branch of the original repository.
+For more examples, check the notebooks directory.
+Contributing
+We welcome contributions to enhance AutoGen! To get started:
 
-Please ensure your code adheres to the project's coding standards.
+Review the CONTRIBUTING.md file for guidelines.
+Join our Discord server for real-time discussions.
+Check the project roadmap for current priorities.
+Submit issues or pull requests with the proj-studio tag for AutoGen Studio-related contributions.
 
-📄 License
-This project is licensed under the MIT License - see the LICENSE file for details.
-[9]: https://pypi.org/project/autogen/?utm_source=chatgpt.com "autogen·PyPI"
-[10]: https://www.reddit.com/r/AutoGenAI/comments/1i18fft?utm_source=chatgpt.com "AutoGen v0.4.1 released"
-[11]: https://www.reddit.com/r/AutoGenAI/comments/1hxhcaq?utm_source=chatgpt.com "AG2 v0.7.0 released"
-[12]: https://github.com/Sideshsundar/Autogen?utm_source=chatgpt.com "GitHub - Sideshsundar/Autogen"
-[13]: https://autogenhub.github.io/autogen/?utm_source=chatgpt.com "AutoGen | AutoGen"
-[14]: https://arxiv.org/abs/2308.08155?utm_source=chatgpt.com "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation"
+License
+This project is licensed under the MIT License for the original code from microsoft/autogen (see LICENSE_original_MIT). Modifications and additions in this fork are licensed under the Apache License, Version 2.0 (see LICENSE).
+Acknowledgments
+
+Built upon the original AutoGen project by Microsoft.
+Contributions from the open-source community and collaborators from various organizations.
+
+Contact
+For questions or support, reach out via:
+
+GitHub Discussions
+Discord
+Email: support@ag2.ai
