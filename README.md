@@ -23,43 +23,12 @@ git clone https://github.com/shdhumale/autogen.git
 cd autogen
 
 
-Install Dependencies:
-pip install -U "autogen-agentchat" "autogen-ext[openai]"
-
-
 Optional: Install AutoGen Studio:
 pip install -U "autogenstudio"
 autogenstudio ui --port 8080 --appdir ./myapp
 
 Open your browser and navigate to http://localhost:8080 to use the AutoGen Studio interface.
 
-
-Usage
-Below is a basic example of creating a simple information validation workflow with two agents using the AutoGen framework:
-from autogen import ConversableAgent, LLMConfig
-
-# Define LLM configuration (requires OPENAI_API_KEY environment variable)
-llm_config = LLMConfig(api_type="openai", model="gpt-4o-mini")
-
-# Create an assistant agent
-assistant = ConversableAgent(
-    name="assistant",
-    system_message="You are an assistant that responds concisely.",
-    llm_config=llm_config
-)
-
-# Create a fact-checking agent
-fact_checker = ConversableAgent(
-    name="fact_checker",
-    system_message="You are a fact-checking assistant.",
-    llm_config=llm_config
-)
-
-# Initiate a chat between agents
-assistant.initiate_chat(
-    fact_checker,
-    message="Verify the accuracy of the statement: The moon is made of cheese."
-)
 
 For more examples, check the notebooks directory.
 Contributing
@@ -81,5 +50,4 @@ Contact
 For questions or support, reach out via:
 
 GitHub Discussions
-Discord
-Email: support@ag2.ai
+
