@@ -37,48 +37,6 @@ Note: If requirements.txt is not present, you might need to install specific dep
 Set up your environment:
 Depending on the project, you might need to set up environment variables or configuration files. Refer to the config/ directory or any .env.example files if they exist.
 
-💡 Usage
-Here's a basic example of how to use Autogen:
-
-Prepare your template:
-Create a template file (e.g., templates/my_component.py.jinja) with placeholders.
-
-# templates/my_component.py.jinja
-class {{ component_name }}:
-    def __init__(self, name):
-        self.name = name
-
-    def greet(self):
-        print(f"Hello from {{ component_name }} named {self.name}!")
-
-Create a configuration file (e.g., config/generate_component.json):
-This file will provide the data for the template.
-
-{
-    "template": "my_component.py.jinja",
-    "output_path": "generated/my_component.py",
-    "data": {
-        "component_name": "MyAwesomeComponent"
-    }
-}
-
-Run the generator:
-
-python autogen.py generate -c config/generate_component.json
-
-Note: The exact command might vary based on the project's main script (e.g., main.py, app.py).
-
-This will generate a file generated/my_component.py with the content:
-
-# generated/my_component.py
-class MyAwesomeComponent:
-    def __init__(self, name):
-        self.name = name
-
-    def greet(self):
-        print(f"Hello from MyAwesomeComponent named {self.name}!")
-
-Refer to the examples/ directory for more detailed usage scenarios and advanced configurations.
 
 🤝 Contributing
 We welcome contributions to Autogen! If you'd like to contribute, please follow these guidelines:
